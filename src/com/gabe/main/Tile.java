@@ -4,6 +4,9 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
 
 /**
  * Created by Gabriel on 2020-05-07.
@@ -34,10 +37,9 @@ public class Tile {
     
     public static void readTilesFromFile() {
         try {
-            BufferedReader br = new BufferedReader(new FileReader(Tile.class.getResource("/com/gabe/main/maps/Tiles.txt").getFile()));
-            int i = 0;
+            BufferedReader br = new BufferedReader(new InputStreamReader(Tile.class.getResourceAsStream("/com/gabe/main/maps/Tiles.txt")));
             String line;
-            while ((line = br.readLine()) != null) {
+            for (int i = 0; (line = br.readLine()) != null; i++) {
                 for (int j = 0; j < line.length(); j++) {
                     TileID id = TileID.Air;
                     boolean isCollidable = false;
@@ -72,7 +74,6 @@ public class Tile {
                     }
                     tiles[i][j] = new Tile(j, i, isCollidable, isSlope, slopeHitBox, id);
                 }
-                i++;
             }
             br.close();
         } catch (Exception e) {

@@ -14,7 +14,6 @@ public class Handler {
         for(int i = 0; i < object.size(); i++) {
             GameObject entity = object.get(i);
             entity.tick();
-            
         }
     }
     

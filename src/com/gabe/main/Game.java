@@ -166,7 +166,7 @@ public class Game extends Canvas implements Runnable {
         return val;
     }
     
-    public static void main(String args[]) throws Exception {
+    public static void main(String[] args) throws Exception {
         new Game();
     }
     

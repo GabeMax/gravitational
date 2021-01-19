@@ -23,12 +23,12 @@ public class Animation {
     
     static {
         try {
-            playerIdleRight = new ImageIcon(new File(Player.class.getResource("/com/gabe/main/images/animations/Standin.gif").getFile()).toURI().toURL()).getImage();
-            playerIdleLeft = new ImageIcon(new File(Player.class.getResource("/com/gabe/main/images/animations/StandinLeft.gif").getFile()).toURI().toURL()).getImage();
-            playerWalkingRight = new ImageIcon(new File(Player.class.getResource("/com/gabe/main/images/animations/Walkin.gif").getFile()).toURI().toURL()).getImage();
-            playerWalkingLeft = new ImageIcon(new File(Player.class.getResource("/com/gabe/main/images/animations/WalkinLeft.gif").getFile()).toURI().toURL()).getImage();
-            playerJumpRight = new ImageIcon(new File(Player.class.getResource("/com/gabe/main/images/animations/FlailingJump.gif").getFile()).toURI().toURL()).getImage();
-            playerJumpLeft = new ImageIcon(new File(Player.class.getResource("/com/gabe/main/images/animations/FlailingJumpLeft.gif").getFile()).toURI().toURL()).getImage();
+            playerIdleRight = new ImageIcon(Player.class.getResourceAsStream("/com/gabe/main/images/animations/Standin.gif").readAllBytes()).getImage();
+            playerIdleLeft = new ImageIcon(Player.class.getResourceAsStream("/com/gabe/main/images/animations/StandinLeft.gif").readAllBytes()).getImage();
+            playerWalkingRight = new ImageIcon(Player.class.getResourceAsStream("/com/gabe/main/images/animations/Walkin.gif").readAllBytes()).getImage();
+            playerWalkingLeft = new ImageIcon(Player.class.getResourceAsStream("/com/gabe/main/images/animations/WalkinLeft.gif").readAllBytes()).getImage();
+            playerJumpRight = new ImageIcon(Player.class.getResourceAsStream("/com/gabe/main/images/animations/FlailingJump.gif").readAllBytes()).getImage();
+            playerJumpLeft = new ImageIcon(Player.class.getResourceAsStream("/com/gabe/main/images/animations/FlailingJumpLeft.gif").readAllBytes()).getImage();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -48,12 +48,11 @@ public class Animation {
     
     public static Image getRotatedImage(GameObject object, Image image) {
         BufferedImage rotatedImage = ImageRotator.toBufferedImage(image);
-        switch(object.getGravityDirection()) {
-            case DOWN: return rotatedImage;
-            case UP: return ImageRotator.flipImage(rotatedImage);
-            case LEFT: return ImageRotator.rotateImageClockwise(rotatedImage);
-            case RIGHT: return ImageRotator.rotateImageCounterClockwise(rotatedImage);
-        }
-        return rotatedImage;
+        return switch (object.getGravityDirection()) {
+            case DOWN -> rotatedImage;
+            case UP -> ImageRotator.flipImage(rotatedImage);
+            case LEFT -> ImageRotator.rotateImageClockwise(rotatedImage);
+            case RIGHT -> ImageRotator.rotateImageCounterClockwise(rotatedImage);
+        };
     }
 }

@@ -110,9 +110,6 @@ public class Player extends LivingGameObject {
     }
 
     public boolean hasKeysPressed() {
-        if (KeyInput.isKeyDown(KeyEvent.VK_A) || KeyInput.isKeyDown(KeyEvent.VK_D) || KeyInput.isKeyDown(KeyEvent.VK_SPACE)) {
-            return true;
-        }
-        return false;
+        return KeyInput.isKeyDown(KeyEvent.VK_A) || KeyInput.isKeyDown(KeyEvent.VK_D) || KeyInput.isKeyDown(KeyEvent.VK_SPACE);
     }
 }

@@ -74,39 +74,19 @@ public class Inventory {
     }
 
     public void drawDigit(Graphics g, ItemSlot itemSlot, int num, int pos) {
-        BufferedImage finalNumber = null;
-        switch(num) {
-            case 0:
-                finalNumber = ImageStorage.numberSignZero;
-                break;
-            case 1:
-                finalNumber = ImageStorage.numberSignOne;
-                break;
-            case 2:
-                finalNumber = ImageStorage.numberSignTwo;
-                break;
-            case 3:
-                finalNumber = ImageStorage.numberSignThree;
-                break;
-            case 4:
-                finalNumber = ImageStorage.numberSignFour;
-                break;
-            case 5:
-                finalNumber = ImageStorage.numberSignFive;
-                break;
-            case 6:
-                finalNumber = ImageStorage.numberSignSix;
-                break;
-            case 7:
-                finalNumber = ImageStorage.numberSignSeven;
-                break;
-            case 8:
-                finalNumber = ImageStorage.numberSignEight;
-                break;
-            case 9:
-                finalNumber = ImageStorage.numberSignNine;
-                break;
-        }
+        BufferedImage finalNumber = switch (num) {
+            case 0 -> ImageStorage.numberSignZero;
+            case 1 -> ImageStorage.numberSignOne;
+            case 2 -> ImageStorage.numberSignTwo;
+            case 3 -> ImageStorage.numberSignThree;
+            case 4 -> ImageStorage.numberSignFour;
+            case 5 -> ImageStorage.numberSignFive;
+            case 6 -> ImageStorage.numberSignSix;
+            case 7 -> ImageStorage.numberSignSeven;
+            case 8 -> ImageStorage.numberSignEight;
+            case 9 -> ImageStorage.numberSignNine;
+            default -> null;
+        };
         g.drawImage(finalNumber, itemSlot.x + (inventoryTileWidth * 2/3) - (pos * (inventoryTileWidth/4) * 3/4), itemSlot.y + (inventoryTileHeight * 2/3), null);
     }
     
@@ -212,9 +192,7 @@ public class Inventory {
     
     public boolean pointIsInsideSlot(Point point, ItemSlot itemSlot) {
         if(point.x > itemSlot.x && point.x < (itemSlot.x + inventoryTileWidth)) {
-            if(point.y > itemSlot.y && point.y < (itemSlot.y + inventoryTileHeight)) {
-                return true;
-            }
+            return point.y > itemSlot.y && point.y < (itemSlot.y + inventoryTileHeight);
         }
         return false;
     }

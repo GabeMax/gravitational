@@ -65,35 +65,33 @@ public class Triangle {
     public Line[] getAdjacentLines(GameObject object, Point point) {
         Line[] lines = new Line[3];
         int i = 0;
-        switch(object.getGravityDirection()) {
-            case DOWN:
-            case UP:
-                if(isBetweenX(point, (int)triangleBase.getStartX(), (int)triangleBase.getEndX())) {
+        switch (object.getGravityDirection()) {
+            case DOWN, UP -> {
+                if (isBetweenX(point, (int) triangleBase.getStartX(), (int) triangleBase.getEndX())) {
                     lines[i] = triangleBase;
                     i++;
                 }
-                if(isBetweenX(point, (int)triangleOuter1.getStartX(), (int)triangleOuter1.getEndX())) {
+                if (isBetweenX(point, (int) triangleOuter1.getStartX(), (int) triangleOuter1.getEndX())) {
                     lines[i] = triangleOuter1;
                     i++;
                 }
-                if(isBetweenX(point, (int)triangleOuter2.getStartX(), (int)triangleOuter2.getEndX())) {
+                if (isBetweenX(point, (int) triangleOuter2.getStartX(), (int) triangleOuter2.getEndX())) {
                     lines[i] = triangleOuter2;
                 }
-                break;
-            case LEFT:
-            case RIGHT:
-                if(isBetweenY(point, (int)triangleBase.getStartY(), (int)triangleBase.getEndY())) {
+            }
+            case LEFT, RIGHT -> {
+                if (isBetweenY(point, (int) triangleBase.getStartY(), (int) triangleBase.getEndY())) {
                     lines[i] = triangleBase;
                     i++;
                 }
-                if(isBetweenY(point, (int)triangleOuter1.getStartY(), (int)triangleOuter1.getEndY())) {
+                if (isBetweenY(point, (int) triangleOuter1.getStartY(), (int) triangleOuter1.getEndY())) {
                     lines[i] = triangleOuter1;
                     i++;
                 }
-                if(isBetweenY(point, (int)triangleOuter2.getStartY(), (int)triangleOuter2.getEndY())) {
+                if (isBetweenY(point, (int) triangleOuter2.getStartY(), (int) triangleOuter2.getEndY())) {
                     lines[i] = triangleOuter2;
                 }
-                break;
+            }
         }
         return lines;
     }
@@ -139,59 +137,63 @@ public class Triangle {
         if(lines[0] == null) {
             return new Point(0, 0);
         }
-        switch(object.getGravityDirection()) {
-            case DOWN:
-                for(Line line: lines) {
-                    if(line != null) {
+        switch (object.getGravityDirection()) {
+            case DOWN -> {
+                for (Line line : lines) {
+                    if (line != null) {
                         Point yValue = getPointAtXValue(point, line);
-                        if(yValue == null) {
-                            yValue = new Point(point.x, (int)line.getStartY());
+                        if (yValue == null) {
+                            yValue = new Point(point.x, (int) line.getStartY());
                         }
-                        if(yValue.y < yOffsetDown) {
+                        if (yValue.y < yOffsetDown) {
                             yOffsetDown = yValue.y;
                         }
                     }
                 }
                 return new Point(0, point.y - yOffsetDown);
-            case UP:
-                for(Line line: lines) {
-                    if(line != null) {
+            }
+            case UP -> {
+                for (Line line : lines) {
+                    if (line != null) {
                         Point yValue = getPointAtXValue(point, line);
-                        if(yValue == null) {
-                            yValue = new Point(point.x, (int)line.getStartY());
+                        if (yValue == null) {
+                            yValue = new Point(point.x, (int) line.getStartY());
                         }
-                        if(yValue.y > yOffsetUp) {
+                        if (yValue.y > yOffsetUp) {
                             yOffsetUp = yValue.y;
                         }
                     }
                 }
                 return new Point(0, point.y - yOffsetUp);
-            case LEFT:
-                for(Line line: lines) {
-                    if(line != null) {
+            }
+            case LEFT -> {
+                for (Line line : lines) {
+                    if (line != null) {
                         Point xValue = getPointAtYValue(point, line);
-                        if(xValue == null) {
-                            xValue = new Point((int)line.getStartX(), point.y);
+                        if (xValue == null) {
+                            xValue = new Point((int) line.getStartX(), point.y);
                         }
-                        if(xValue.x > xOffsetLeft) {
+                        if (xValue.x > xOffsetLeft) {
                             xOffsetLeft = xValue.x;
                         }
                     }
                 }
                 return new Point(point.x - xOffsetLeft, 0);
-            case RIGHT:
-                for(Line line: lines) {
-                    if(line != null) {
+            }
+            case RIGHT -> {
+                for (Line line : lines) {
+                    if (line != null) {
                         Point xValue = getPointAtYValue(point, line);
-                        if(xValue == null) {
-                            xValue = new Point((int)line.getStartX(), point.y);
+                        if (xValue == null) {
+                            xValue = new Point((int) line.getStartX(), point.y);
                         }
-                        if(xValue.x < xOffsetRight) {
+                        if (xValue.x < xOffsetRight) {
                             xOffsetRight = xValue.x;
                         }
                     }
                 }
                 return new Point(point.x - xOffsetRight, 0);
+            }
         }
         return null;
     }
@@ -201,59 +203,63 @@ public class Triangle {
         if(lines[0] == null) {
             return new Point(0, 0);
         }
-        switch(object.getGravityDirection()) {
-            case DOWN:
-                for(Line line: lines) {
-                    if(line != null) {
+        switch (object.getGravityDirection()) {
+            case DOWN -> {
+                for (Line line : lines) {
+                    if (line != null) {
                         Point yValue = getPointAtXValue(point, line);
-                        if(yValue == null) {
-                            yValue = new Point(point.x, (int)line.getStartY());
+                        if (yValue == null) {
+                            yValue = new Point(point.x, (int) line.getStartY());
                         }
-                        if(yValue.y > yOffsetDown) {
+                        if (yValue.y > yOffsetDown) {
                             yOffsetDown = yValue.y;
                         }
                     }
                 }
                 return new Point(0, point.y - yOffsetDown);
-            case UP:
-                for(Line line: lines) {
-                    if(line != null) {
+            }
+            case UP -> {
+                for (Line line : lines) {
+                    if (line != null) {
                         Point yValue = getPointAtXValue(point, line);
-                        if(yValue == null) {
-                            yValue = new Point(point.x, (int)line.getStartY());
+                        if (yValue == null) {
+                            yValue = new Point(point.x, (int) line.getStartY());
                         }
-                        if(yValue.y < yOffsetUp) {
+                        if (yValue.y < yOffsetUp) {
                             yOffsetUp = yValue.y;
                         }
                     }
                 }
                 return new Point(0, point.y - yOffsetUp);
-            case LEFT:
-                for(Line line: lines) {
-                    if(line != null) {
+            }
+            case LEFT -> {
+                for (Line line : lines) {
+                    if (line != null) {
                         Point xValue = getPointAtYValue(point, line);
-                        if(xValue == null) {
-                            xValue = new Point((int)line.getStartX(), point.y);
+                        if (xValue == null) {
+                            xValue = new Point((int) line.getStartX(), point.y);
                         }
-                        if(xValue.x < xOffsetLeft) {
+                        if (xValue.x < xOffsetLeft) {
                             xOffsetLeft = xValue.x;
                         }
                     }
                 }
                 return new Point(point.x - xOffsetLeft, 0);
-            case RIGHT:
-                for(Line line: lines) {
-                    if(line != null) {
+            }
+            case RIGHT -> {
+                for (Line line : lines) {
+                    if (line != null) {
                         Point xValue = getPointAtYValue(point, line);
-                        if(xValue == null) {
-                            xValue = new Point((int)line.getStartX(), point.y);
+                        if (xValue == null) {
+                            xValue = new Point((int) line.getStartX(), point.y);
                         }
-                        if(xValue.x > xOffsetRight) {
+                        if (xValue.x > xOffsetRight) {
                             xOffsetRight = xValue.x;
                         }
                     }
                 }
                 return new Point(point.x - xOffsetRight, 0);
+            }
         }
         return null;
     }
@@ -342,10 +348,7 @@ public class Triangle {
             p1 = p2;
             p2 = swap;
         }
-        if(p.x >= p1 && p.x <= p2) {
-            return true;
-        }
-        return false;
+        return p.x >= p1 && p.x <= p2;
     }
 
     public static boolean isBetweenY(Point p, int p1, int p2) {
@@ -354,10 +357,7 @@ public class Triangle {
             p1 = p2;
             p2 = swap;
         }
-        if(p.y >= p1 && p.y <= p2) {
-            return true;
-        }
-        return false;
+        return p.y >= p1 && p.y <= p2;
     }
 
     public static Line[] getAdjacentLines(Point point, Triangle slope) {
@@ -402,7 +402,7 @@ public class Triangle {
         } else if(m == 0) {
             return null;
         }
-        Double b = getBValue(line, m);
+        double b = getBValue(line, m);
         return new Point(x, (int)Math.round(m*x+b));
     }
     

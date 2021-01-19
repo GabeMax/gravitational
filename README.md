@@ -1,0 +1,2 @@
+In progress 2D platformer. Code needs revision as this was done before I became more experienced in java. 
+Movement: WASD to move character around, arrow keys to switch gravity and "Space" to jump. "P" pauses the game, "U" unpauses the game, "E" opens inventory and "ESC" closes inventory.

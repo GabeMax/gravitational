@@ -24,53 +24,46 @@ public class Collision {
     
     public static Point getTopLeft(GameObject object) {
         Rectangle hitBox = object.getBoundingBox()[0];
-        switch (object.getGravityDirection()) {
-            case DOWN: return getTopLeft(hitBox);
-            case RIGHT: return getBottomLeft(hitBox);
-            case LEFT: return getTopRight(hitBox);
-            case UP: return getBottomRight(hitBox);
-        }
-        return null;
+        return switch (object.getGravityDirection()) {
+            case DOWN -> getTopLeft(hitBox);
+            case RIGHT -> getBottomLeft(hitBox);
+            case LEFT -> getTopRight(hitBox);
+            case UP -> getBottomRight(hitBox);
+        };
     }
     
     public static Point getTopRight(GameObject object) {
         Rectangle hitBox = object.getBoundingBox()[0];
-        switch(object.getGravityDirection()) {
-            case DOWN: return getTopRight(hitBox);
-            case RIGHT: return getTopLeft(hitBox);
-            case LEFT: return getBottomRight(hitBox);
-            case UP: return getBottomLeft(hitBox);
-        }
-        return null;
+        return switch (object.getGravityDirection()) {
+            case DOWN -> getTopRight(hitBox);
+            case RIGHT -> getTopLeft(hitBox);
+            case LEFT -> getBottomRight(hitBox);
+            case UP -> getBottomLeft(hitBox);
+        };
     }
     
     public static Point getBottomLeft(GameObject object) {
         Rectangle hitBox = object.getBoundingBox()[0];
-        switch(object.getGravityDirection()) {
-            case DOWN: return getBottomLeft(hitBox);
-            case RIGHT: return getBottomRight(hitBox);
-            case LEFT: return getTopLeft(hitBox);
-            case UP: return getTopRight(hitBox);
-        }
-        return null;
+        return switch (object.getGravityDirection()) {
+            case DOWN -> getBottomLeft(hitBox);
+            case RIGHT -> getBottomRight(hitBox);
+            case LEFT -> getTopLeft(hitBox);
+            case UP -> getTopRight(hitBox);
+        };
     }
     
     public static Point getBottomRight(GameObject object) {
         Rectangle hitBox = object.getBoundingBox()[0];
-        switch(object.getGravityDirection()) {
-            case DOWN: return getBottomRight(hitBox);
-            case RIGHT: return getTopRight(hitBox);
-            case LEFT: return getBottomLeft(hitBox);
-            case UP: return getTopLeft(hitBox);
-        }
-        return null;
+        return switch (object.getGravityDirection()) {
+            case DOWN -> getBottomRight(hitBox);
+            case RIGHT -> getTopRight(hitBox);
+            case LEFT -> getBottomLeft(hitBox);
+            case UP -> getTopLeft(hitBox);
+        };
     }
     
     public static boolean pointIsCollidingWithRectangle(Rectangle hitBox, Point point) {
-        if(Triangle.isBetweenX(point, getBottomLeft(hitBox).x, getBottomRight(hitBox).x) && Triangle.isBetweenY(point, getBottomLeft(hitBox).y, getTopLeft(hitBox).y)) {
-            return true;
-        }
-        return false;
+        return Triangle.isBetweenX(point, getBottomLeft(hitBox).x, getBottomRight(hitBox).x) && Triangle.isBetweenY(point, getBottomLeft(hitBox).y, getTopLeft(hitBox).y);
     }
     
     public static boolean topLeftIsColliding(GameObject object) {
@@ -91,13 +84,12 @@ public class Collision {
     
     public static Point getSlopeCollidablePoint(GameObject object) {
         Rectangle hitBox = object.getBoundingBox()[0];
-        switch(object.getGravityDirection()) {
-            case DOWN: return new Point(((getBottomRight(hitBox).x - getBottomLeft(hitBox).x)/2) + getBottomLeft(hitBox).x, getBottomLeft(hitBox).y);
-            case UP: return new Point(((getBottomRight(hitBox).x - getBottomLeft(hitBox).x)/2) + getBottomLeft(hitBox).x, getTopLeft(hitBox).y);
-            case LEFT: return new Point(getTopLeft(hitBox).x, ((getBottomLeft(hitBox).y - getTopLeft(hitBox).y) / 2) + getTopLeft(hitBox).y);
-            case RIGHT: return new Point(getTopRight(hitBox).x, ((getBottomLeft(hitBox).y - getTopLeft(hitBox).y) / 2) + getTopLeft(hitBox).y);
-        }
-        return new Point(((getBottomRight(hitBox).x - getBottomLeft(hitBox).x)/2) + getBottomLeft(hitBox).x, getBottomLeft(hitBox).y);
+        return switch (object.getGravityDirection()) {
+            case DOWN -> new Point(((getBottomRight(hitBox).x - getBottomLeft(hitBox).x) / 2) + getBottomLeft(hitBox).x, getBottomLeft(hitBox).y);
+            case UP -> new Point(((getBottomRight(hitBox).x - getBottomLeft(hitBox).x) / 2) + getBottomLeft(hitBox).x, getTopLeft(hitBox).y);
+            case LEFT -> new Point(getTopLeft(hitBox).x, ((getBottomLeft(hitBox).y - getTopLeft(hitBox).y) / 2) + getTopLeft(hitBox).y);
+            case RIGHT -> new Point(getTopRight(hitBox).x, ((getBottomLeft(hitBox).y - getTopLeft(hitBox).y) / 2) + getTopLeft(hitBox).y);
+        };
     }
 
     public static Tile getSlopeCollidableTile(GameObject object) {
@@ -106,13 +98,12 @@ public class Collision {
     
     public static Point getRoofSlopeCollidablePoint(GameObject object) {
         Rectangle hitBox = object.getBoundingBox()[0];
-        switch(object.getGravityDirection()) {
-            case DOWN: return new Point(((getTopRight(hitBox).x - getTopLeft(hitBox).x) / 2) + getTopLeft(hitBox).x, getTopLeft(hitBox).y);
-            case UP: return new Point(((getTopRight(hitBox).x - getTopLeft(hitBox).x) / 2) + getTopLeft(hitBox).x, getBottomLeft(hitBox).y);
-            case LEFT: return new Point(getTopRight(hitBox).x, ((getBottomRight(hitBox).y - getTopRight(hitBox).y) / 2) + getBottomRight(hitBox).y);
-            case RIGHT: return new Point(getTopLeft(hitBox).x, ((getBottomRight(hitBox).y - getTopRight(hitBox).y) / 2) + getBottomRight(hitBox).y);
-        }
-        return new Point(((getTopRight(hitBox).x - getTopLeft(hitBox).x) / 2) + getTopLeft(hitBox).x, getTopLeft(hitBox).y);
+        return switch (object.getGravityDirection()) {
+            case DOWN -> new Point(((getTopRight(hitBox).x - getTopLeft(hitBox).x) / 2) + getTopLeft(hitBox).x, getTopLeft(hitBox).y);
+            case UP -> new Point(((getTopRight(hitBox).x - getTopLeft(hitBox).x) / 2) + getTopLeft(hitBox).x, getBottomLeft(hitBox).y);
+            case LEFT -> new Point(getTopRight(hitBox).x, ((getBottomRight(hitBox).y - getTopRight(hitBox).y) / 2) + getBottomRight(hitBox).y);
+            case RIGHT -> new Point(getTopLeft(hitBox).x, ((getBottomRight(hitBox).y - getTopRight(hitBox).y) / 2) + getBottomRight(hitBox).y);
+        };
     }
     
     public static Tile getRoofSlopeCollidableTile(GameObject object) {
@@ -121,13 +112,12 @@ public class Collision {
     
     public static Point getWallLeftSlopeCollidablePoint(GameObject object) {
         Rectangle hitBox = object.getBoundingBox()[0];
-        switch(object.getGravityDirection()) {
-            case DOWN: return new Point(getTopLeft(hitBox).x, (((getBottomLeft(hitBox).y - getTopLeft(hitBox).y)/2)+getTopLeft(hitBox).y));
-            case UP: return new Point(getTopRight(hitBox).x, ((getBottomRight(hitBox).y - getTopRight(hitBox).y)/2)+getBottomRight(hitBox).y);
-            case LEFT: return new Point(((getTopRight(hitBox).x - getTopLeft(hitBox).x) / 2 )+ getTopLeft(hitBox).x, getTopLeft(hitBox).y);
-            case RIGHT: return new Point(((getBottomLeft(hitBox).x - getBottomRight(hitBox).x) / 2) + getBottomLeft(hitBox).x, getBottomLeft(hitBox).y);
-        }
-        return new Point(getTopLeft(hitBox).x, (((getBottomLeft(hitBox).y - getTopLeft(hitBox).y)/2)+getTopLeft(hitBox).y));
+        return switch (object.getGravityDirection()) {
+            case DOWN -> new Point(getTopLeft(hitBox).x, (((getBottomLeft(hitBox).y - getTopLeft(hitBox).y) / 2) + getTopLeft(hitBox).y));
+            case UP -> new Point(getTopRight(hitBox).x, ((getBottomRight(hitBox).y - getTopRight(hitBox).y) / 2) + getBottomRight(hitBox).y);
+            case LEFT -> new Point(((getTopRight(hitBox).x - getTopLeft(hitBox).x) / 2) + getTopLeft(hitBox).x, getTopLeft(hitBox).y);
+            case RIGHT -> new Point(((getBottomLeft(hitBox).x - getBottomRight(hitBox).x) / 2) + getBottomLeft(hitBox).x, getBottomLeft(hitBox).y);
+        };
     }
     
     public static Tile getWallLeftSlopeCollidableTile(GameObject object) {
@@ -136,13 +126,12 @@ public class Collision {
     
     public static Point getWallRightSlopeCollidablePoint(GameObject object) {
         Rectangle hitBox = object.getBoundingBox()[0];
-        switch(object.getGravityDirection()) {
-            case DOWN: return new Point(getTopRight(hitBox).x, ((getBottomRight(hitBox).y - getTopRight(hitBox).y) / 2) + getTopRight(hitBox).y);
-            case UP: return new Point(getTopLeft(hitBox).x, ((getBottomLeft(hitBox).y - getTopLeft(hitBox).y) / 2) + getTopLeft(hitBox).y);
-            case LEFT: return new Point(((getBottomRight(hitBox).x - getBottomLeft(hitBox).x) / 2) + getBottomLeft(hitBox).x, getBottomLeft(hitBox).y);
-            case RIGHT: return new Point(((getTopRight(hitBox).x - getTopLeft(hitBox).x) / 2) + getTopLeft(hitBox).x, getTopLeft(hitBox).y);
-        }
-        return new Point(getTopRight(hitBox).x, ((getBottomRight(hitBox).y - getTopRight(hitBox).y) / 2) + getTopRight(hitBox).y);
+        return switch (object.getGravityDirection()) {
+            case DOWN -> new Point(getTopRight(hitBox).x, ((getBottomRight(hitBox).y - getTopRight(hitBox).y) / 2) + getTopRight(hitBox).y);
+            case UP -> new Point(getTopLeft(hitBox).x, ((getBottomLeft(hitBox).y - getTopLeft(hitBox).y) / 2) + getTopLeft(hitBox).y);
+            case LEFT -> new Point(((getBottomRight(hitBox).x - getBottomLeft(hitBox).x) / 2) + getBottomLeft(hitBox).x, getBottomLeft(hitBox).y);
+            case RIGHT -> new Point(((getTopRight(hitBox).x - getTopLeft(hitBox).x) / 2) + getTopLeft(hitBox).x, getTopLeft(hitBox).y);
+        };
     }
     
     public static Tile getWallRightSlopeCollidableTile(GameObject object) {
@@ -174,74 +163,42 @@ public class Collision {
     }
     
     public static void snapObjectToTopOfTile(GameObject object, Tile tile) {
-        switch(object.getGravityDirection()) {
-            case DOWN:
-                snapToTop(object, tile);
-                break;
-            case UP:
-                snapToBottom(object, tile);
-                break;
-            case LEFT:
-                snapToRight(object, tile);
-                break;
-            case RIGHT:
-                snapToLeft(object, tile);
-                break;
+        switch (object.getGravityDirection()) {
+            case DOWN -> snapToTop(object, tile);
+            case UP -> snapToBottom(object, tile);
+            case LEFT -> snapToRight(object, tile);
+            case RIGHT -> snapToLeft(object, tile);
         }
         object.speedUpAndDown = 0;
         object.isFalling = false;
     }
     
     public static void snapObjectToBottomOfTile(GameObject object, Tile tile) {
-        switch(object.getGravityDirection()) {
-            case DOWN:
-                snapToBottom(object, tile);
-                break;
-            case UP:
-                snapToTop(object, tile);
-                break;
-            case LEFT:
-                snapToLeft(object, tile);
-                break;
-            case RIGHT:
-                snapToRight(object, tile);
-                break;
+        switch (object.getGravityDirection()) {
+            case DOWN -> snapToBottom(object, tile);
+            case UP -> snapToTop(object, tile);
+            case LEFT -> snapToLeft(object, tile);
+            case RIGHT -> snapToRight(object, tile);
         }
         object.speedUpAndDown = 0;
     }
     
     public static void snapObjectToLeftOfTile(GameObject object, Tile tile) {
-        switch(object.getGravityDirection()) {
-            case DOWN:
-                snapToLeft(object, tile);
-                break;
-            case UP:
-                snapToRight(object, tile);
-                break;
-            case LEFT:
-                snapToTop(object, tile);
-                break;
-            case RIGHT:
-                snapToBottom(object, tile);
-                break;
+        switch (object.getGravityDirection()) {
+            case DOWN -> snapToLeft(object, tile);
+            case UP -> snapToRight(object, tile);
+            case LEFT -> snapToTop(object, tile);
+            case RIGHT -> snapToBottom(object, tile);
         }
         object.speedSideWays = 0;
     }
     
     public static void snapObjectToRightOfTile(GameObject object, Tile tile) {
-        switch(object.getGravityDirection()) {
-            case DOWN:
-                snapToRight(object, tile);
-                break;
-            case UP:
-                snapToLeft(object, tile);
-                break;
-            case LEFT:
-                snapToBottom(object, tile);
-                break;
-            case RIGHT:
-                snapToTop(object, tile);
-                break;
+        switch (object.getGravityDirection()) {
+            case DOWN -> snapToRight(object, tile);
+            case UP -> snapToLeft(object, tile);
+            case LEFT -> snapToBottom(object, tile);
+            case RIGHT -> snapToTop(object, tile);
         }
         object.speedSideWays = 0;
     }
@@ -292,31 +249,27 @@ public class Collision {
         if (!bottomLeftOrRight) {
             Point p1 = getBottomLeft(object);
             Point p2 = getBottomRight(object);
-            switch(object.getGravityDirection()) {
-                case DOWN:
+            switch (object.getGravityDirection()) {
+                case DOWN -> {
                     p1.y++;
                     p2.y++;
-                    break;
-                case UP:
+                }
+                case UP -> {
                     p1.y--;
                     p2.y--;
-                    break;
-                case LEFT:
+                }
+                case LEFT -> {
                     p1.x--;
                     p2.x--;
-                    break;
-                case RIGHT:
+                }
+                case RIGHT -> {
                     p1.x++;
                     p2.x++;
-                    break;
+                }
             }
             Tile tileLeft = Tile.getTileAtPoint(p1);
             Tile tileRight = Tile.getTileAtPoint(p2);
-            if (tileLeft.isCollidable || tileRight.isCollidable) {
-                object.isFalling = false;
-            } else {
-                object.isFalling = true;
-            }
+            object.isFalling = !tileLeft.isCollidable && !tileRight.isCollidable;
         }
     }
 
@@ -361,19 +314,11 @@ public class Collision {
     }
     
     public static void upAndDownTranslate(GameObject object) {
-        switch(object.getGravityDirection()) {
-            case DOWN:
-                object.y += Math.abs(object.speedSideWays) + 1;
-                break;
-            case UP:
-                object.y -= Math.abs(object.speedSideWays) + 1;
-                break;
-            case LEFT:
-                object.x -= Math.abs(object.speedSideWays) + 1;
-                break;
-            case RIGHT:
-                object.x += Math.abs(object.speedSideWays) + 1;
-                break;
+        switch (object.getGravityDirection()) {
+            case DOWN -> object.y += Math.abs(object.speedSideWays) + 1;
+            case UP -> object.y -= Math.abs(object.speedSideWays) + 1;
+            case LEFT -> object.x -= Math.abs(object.speedSideWays) + 1;
+            case RIGHT -> object.x += Math.abs(object.speedSideWays) + 1;
         }
     }
     

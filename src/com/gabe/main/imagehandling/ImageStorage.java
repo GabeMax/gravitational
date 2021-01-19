@@ -37,36 +37,37 @@ public class ImageStorage {
     static {
         try {
             //Tile Images
-            tileDisplay = ImageIO.read(new File(Tile.class.getResource("/com/gabe/main/images/tile_sprite.png").getFile()));
-            tileSlope = ImageIO.read(new File(Tile.class.getResource("/com/gabe/main/images/tile_sprite_slope.png").getFile()));
-            
+            tileDisplay = ImageIO.read(ImageStorage.class.getResourceAsStream("/com/gabe/main/images/tile_sprite.png"));
+            tileSlope = ImageIO.read(ImageStorage.class.getResourceAsStream("/com/gabe/main/images/tile_sprite_slope.png"));
+
             //Inventory Number Images
-            numberSignZero = ImageIO.read(new File(ImageStorage.class.getResource("/com/gabe/main/images/Numbers/NumberSign_Zero.png").getFile()));
+            numberSignZero = ImageIO.read(ImageStorage.class.getResourceAsStream("/com/gabe/main/images/Numbers/NumberSign_Zero.png"));
             numberSignZero = ImageRotator.toBufferedImage(numberSignZero.getScaledInstance(Inventory.inventoryTileWidth/4, Inventory.inventoryTileHeight/4, Image.SCALE_DEFAULT));
-            numberSignOne = ImageIO.read(new File(ImageStorage.class.getResource("/com/gabe/main/images/Numbers/NumberSign_One.png").getFile()));
+            numberSignOne = ImageIO.read(ImageStorage.class.getResourceAsStream("/com/gabe/main/images/Numbers/NumberSign_One.png"));
             numberSignOne = ImageRotator.toBufferedImage(numberSignOne.getScaledInstance(Inventory.inventoryTileWidth/4, Inventory.inventoryTileHeight/4, Image.SCALE_DEFAULT));
-            numberSignTwo = ImageIO.read(new File(ImageStorage.class.getResource("/com/gabe/main/images/Numbers/NumberSign_Two.png").getFile()));
+            numberSignTwo = ImageIO.read(ImageStorage.class.getResourceAsStream("/com/gabe/main/images/Numbers/NumberSign_Two.png"));
             numberSignTwo = ImageRotator.toBufferedImage(numberSignTwo.getScaledInstance(Inventory.inventoryTileWidth/4,Inventory.inventoryTileHeight/4,Image.SCALE_DEFAULT));
-            numberSignThree = ImageIO.read(new File(ImageStorage.class.getResource("/com/gabe/main/images/Numbers/NumberSign_Three.png").getFile()));
+            numberSignThree = ImageIO.read(ImageStorage.class.getResourceAsStream("/com/gabe/main/images/Numbers/NumberSign_Three.png"));
             numberSignThree = ImageRotator.toBufferedImage(numberSignThree.getScaledInstance(Inventory.inventoryTileWidth/4,Inventory.inventoryTileHeight/4,Image.SCALE_DEFAULT));
-            numberSignFour = ImageIO.read(new File(ImageStorage.class.getResource("/com/gabe/main/images/Numbers/NumberSign_Four.png").getFile()));
+            numberSignFour = ImageIO.read(ImageStorage.class.getResourceAsStream("/com/gabe/main/images/Numbers/NumberSign_Four.png"));
             numberSignFour = ImageRotator.toBufferedImage(numberSignFour.getScaledInstance(Inventory.inventoryTileWidth/4,Inventory.inventoryTileHeight/4,Image.SCALE_DEFAULT));
-            numberSignFive = ImageIO.read(new File(ImageStorage.class.getResource("/com/gabe/main/images/Numbers/NumberSign_Five.png").getFile()));
+            numberSignFive = ImageIO.read(ImageStorage.class.getResourceAsStream("/com/gabe/main/images/Numbers/NumberSign_Five.png"));
             numberSignFive = ImageRotator.toBufferedImage(numberSignFive.getScaledInstance(Inventory.inventoryTileWidth/4,Inventory.inventoryTileHeight/4,Image.SCALE_DEFAULT));
-            numberSignSix = ImageIO.read(new File(ImageStorage.class.getResource("/com/gabe/main/images/Numbers/NumberSign_Six.png").getFile()));
+            numberSignSix = ImageIO.read(ImageStorage.class.getResourceAsStream("/com/gabe/main/images/Numbers/NumberSign_Six.png"));
             numberSignSix = ImageRotator.toBufferedImage(numberSignSix.getScaledInstance(Inventory.inventoryTileWidth/4,Inventory.inventoryTileHeight/4,Image.SCALE_DEFAULT));
-            numberSignSeven = ImageIO.read(new File(ImageStorage.class.getResource("/com/gabe/main/images/Numbers/NumberSign_Seven.png").getFile()));
+            numberSignSeven = ImageIO.read(ImageStorage.class.getResourceAsStream("/com/gabe/main/images/Numbers/NumberSign_Seven.png"));
             numberSignSeven = ImageRotator.toBufferedImage(numberSignSeven.getScaledInstance(Inventory.inventoryTileWidth/4,Inventory.inventoryTileHeight/4,Image.SCALE_DEFAULT));
-            numberSignEight = ImageIO.read(new File(ImageStorage.class.getResource("/com/gabe/main/images/Numbers/NumberSign_Eight.png").getFile()));
+            numberSignEight = ImageIO.read(ImageStorage.class.getResourceAsStream("/com/gabe/main/images/Numbers/NumberSign_Eight.png"));
             numberSignEight = ImageRotator.toBufferedImage(numberSignEight.getScaledInstance(Inventory.inventoryTileWidth/4,Inventory.inventoryTileHeight/4,Image.SCALE_DEFAULT));
-            numberSignNine = ImageIO.read(new File(ImageStorage.class.getResource("/com/gabe/main/images/Numbers/NumberSign_Nine.png").getFile()));
+            numberSignNine = ImageIO.read(ImageStorage.class.getResourceAsStream("/com/gabe/main/images/Numbers/NumberSign_Nine.png"));
             numberSignNine = ImageRotator.toBufferedImage(numberSignNine.getScaledInstance(Inventory.inventoryTileWidth/4,Inventory.inventoryTileHeight/4,Image.SCALE_DEFAULT));
-            
+
             //Inventory Slot Images
-            simpleItem = ImageIO.read(new File(Game.class.getResource("/com/gabe/main/images/bananas.png").getFile()));
+            simpleItem = ImageIO.read(Game.class.getResourceAsStream("/com/gabe/main/images/bananas.png"));
             simpleItem = ImageRotator.toBufferedImage(simpleItem.getScaledInstance(itemWidthFactor, itemHeightFactor, Image.SCALE_SMOOTH));
-            grapeImage = ImageIO.read(new File(ImageStorage.class.getResource("/com/gabe/main/images/grapes.png").getFile()));
+            grapeImage = ImageIO.read(ImageStorage.class.getResourceAsStream("/com/gabe/main/images/grapes.png"));
             grapeImage = ImageRotator.toBufferedImage(grapeImage.getScaledInstance(itemWidthFactor, itemHeightFactor, Image.SCALE_SMOOTH));
+
         } catch (Exception e) {
             e.printStackTrace();
         }

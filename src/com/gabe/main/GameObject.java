@@ -47,13 +47,12 @@ public abstract class GameObject {
     }
     public Rectangle getRotatedBoundingBox() {
         BoundingBoxPivot b = getBoundingBoxPivot();
-        switch (getGravityDirection()) {
-            case DOWN: return new Rectangle(x+b.xOffset, y+b.yOffset, b.width, b.height);
-            case RIGHT: return new Rectangle(x+b.xOffset - b.xOffset, y+b.yOffset + b.xOffset, b.height, b.width);
-            case LEFT: return new Rectangle(x+b.xOffset - 2 * b.width + 25, y+b.yOffset + b.xOffset, b.height, b.width);
-            case UP: return new Rectangle( x+b.xOffset, y+b.yOffset, b.width, b.height);
-        }
-        return new Rectangle(x+b.xOffset, y+b.yOffset, b.width, b.height);
+        return switch (getGravityDirection()) {
+            case DOWN -> new Rectangle(x + b.xOffset, y + b.yOffset, b.width, b.height);
+            case RIGHT -> new Rectangle(x + b.xOffset - b.xOffset, y + b.yOffset + b.xOffset, b.height, b.width);
+            case LEFT -> new Rectangle(x + b.xOffset - 2 * b.width + 25, y + b.yOffset + b.xOffset, b.height, b.width);
+            case UP -> new Rectangle(x + b.xOffset, y + b.yOffset, b.width, b.height);
+        };
     }
     public boolean isTouching(Class c) {
         for(GameObject entity: handler.object) {
@@ -118,18 +117,12 @@ public abstract class GameObject {
     private boolean isTouchingLeft(GameObject object) {
         Point upperRight = Collision.getTopRight(this.getBoundingBox()[0]);
         Point lowerRight = Collision.getBottomRight(this.getBoundingBox()[0]);
-        if(Collision.pointIsCollidingWithRectangle(object.getBoundingBox()[0], upperRight) || Collision.pointIsCollidingWithRectangle(object.getBoundingBox()[0], lowerRight)) {
-            return true;
-        }
-        return false;
+        return Collision.pointIsCollidingWithRectangle(object.getBoundingBox()[0], upperRight) || Collision.pointIsCollidingWithRectangle(object.getBoundingBox()[0], lowerRight);
     }
     private boolean isTouchingRight(GameObject object) {
         Point upperLeft = Collision.getTopLeft(this.getBoundingBox()[0]);
         Point lowerLeft = Collision.getBottomLeft(this.getBoundingBox()[0]);
-        if(Collision.pointIsCollidingWithRectangle(object.getBoundingBox()[0], upperLeft) || Collision.pointIsCollidingWithRectangle(object.getBoundingBox()[0], lowerLeft)) {
-            return true;
-        }
-        return false;
+        return Collision.pointIsCollidingWithRectangle(object.getBoundingBox()[0], upperLeft) || Collision.pointIsCollidingWithRectangle(object.getBoundingBox()[0], lowerLeft);
     }
     public int getTotalWidth(Rectangle[] hitBoxes) {
         int maxWidth = Integer.MIN_VALUE;
@@ -193,35 +186,19 @@ public abstract class GameObject {
     
     //Movement Methods
     public void moveObjectSideToSide() {
-        switch(getGravityDirection()) {
-            case DOWN:
-                x += speedSideWays;
-                break;
-            case UP:
-                x -= speedSideWays;
-                break;
-            case LEFT:
-                y += speedSideWays;
-                break;
-            case RIGHT:
-                y -= speedSideWays;
-                break;
+        switch (getGravityDirection()) {
+            case DOWN -> x += speedSideWays;
+            case UP -> x -= speedSideWays;
+            case LEFT -> y += speedSideWays;
+            case RIGHT -> y -= speedSideWays;
         }
     }
     public void moveObjectUpAndDown() {
-        switch(getGravityDirection()) {
-            case DOWN:
-                y += speedUpAndDown;
-                break;
-            case UP:
-                y -= speedUpAndDown;
-                break;
-            case LEFT:
-                x -= speedUpAndDown;
-                break;
-            case RIGHT:
-                x += speedUpAndDown;
-                break;
+        switch (getGravityDirection()) {
+            case DOWN -> y += speedUpAndDown;
+            case UP -> y -= speedUpAndDown;
+            case LEFT -> x -= speedUpAndDown;
+            case RIGHT -> x += speedUpAndDown;
         }
     }
     public void setGravityDirection(Direction d) {
@@ -229,15 +206,10 @@ public abstract class GameObject {
         ListenerHandler.fireEvent(new GravitySwitchEvent(this, new Point(x, y), d));
     }
     public int convertNumberUponDirection(int num) {
-        switch(getGravityDirection()) {
-            case DOWN:
-            case UP:
-                return num;
-            case LEFT:
-            case RIGHT:
-                return -num;
-        }
-        return num;
+        return switch (getGravityDirection()) {
+            case DOWN, UP -> num;
+            case LEFT, RIGHT -> -num;
+        };
     }
     public int getSpeedSideWays(int speedSideWays) {
         return convertNumberUponDirection(speedSideWays);
@@ -263,13 +235,12 @@ public abstract class GameObject {
     
     //Tile methods
     public Tile getTileOffsetPoint(Point p, int xOffset, int yOffset) {
-        switch(getGravityDirection()) {
-            case DOWN: return Tile.tiles[((int)Math.floor(p.y/Tile.tileHeight))+yOffset][((int)Math.floor(p.x/Tile.tileWidth))+xOffset];
-            case RIGHT: return Tile.tiles[((int)Math.floor(p.y/Tile.tileHeight))+xOffset][((int)Math.floor(p.x/Tile.tileWidth))+yOffset];
-            case LEFT: return Tile.tiles[((int)Math.floor(p.y/Tile.tileHeight))-xOffset][((int)Math.floor(p.x/Tile.tileWidth))-yOffset];
-            case UP: return Tile.tiles[((int)Math.floor(p.y/Tile.tileHeight))-yOffset][((int)Math.floor(p.x/Tile.tileWidth))-xOffset];
-        }
-        return Tile.tiles[((int)Math.floor(p.y/Tile.tileHeight))+yOffset][((int)Math.floor(p.x/Tile.tileWidth))+xOffset];
+        return switch (getGravityDirection()) {
+            case DOWN -> Tile.tiles[((int) Math.floor(p.y / Tile.tileHeight)) + yOffset][((int) Math.floor(p.x / Tile.tileWidth)) + xOffset];
+            case RIGHT -> Tile.tiles[((int) Math.floor(p.y / Tile.tileHeight)) + xOffset][((int) Math.floor(p.x / Tile.tileWidth)) + yOffset];
+            case LEFT -> Tile.tiles[((int) Math.floor(p.y / Tile.tileHeight)) - xOffset][((int) Math.floor(p.x / Tile.tileWidth)) - yOffset];
+            case UP -> Tile.tiles[((int) Math.floor(p.y / Tile.tileHeight)) - yOffset][((int) Math.floor(p.x / Tile.tileWidth)) - xOffset];
+        };
     }
     
     //Getter methods
