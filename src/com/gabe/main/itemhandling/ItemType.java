@@ -10,8 +10,8 @@ import java.awt.image.BufferedImage;
  */
 public enum ItemType {
     NONE(null, null, 0, null, null),
-    FRUIT("Polar Star", "Bruh moment", 64, ImageStorage.simpleItem, null),
-    STAR_FURY("Starfury", "Epic kfc time", 5, ImageStorage.grapeImage, null),
+    FRUIT("Polar Star", "Weapon", 64, ImageStorage.simpleItem, null),
+    STAR_FURY("Starfury", "Sword", 5, ImageStorage.grapeImage, null),
     POLAR_STAR("Polar star", "Basic gun", 1, ImageStorage.grapeImage, new PistolMethod())
     ;
     

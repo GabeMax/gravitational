@@ -14,10 +14,7 @@ public class ListenerHandler {
     
     public static void registerListener(Class c, Listener listener) {
         listenerHashMap.computeIfAbsent(c, l -> new ArrayList<>());
-        listenerHashMap.computeIfPresent(c, (aClass, listeners) -> {
-            listeners.add(listener);
-            return listeners;
-        });
+        listenerHashMap.get(c).add(listener);
     }
     
     public static void fireEvent(Event event) {

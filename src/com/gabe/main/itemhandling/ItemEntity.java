@@ -30,7 +30,7 @@ public class ItemEntity extends GameObject {
             ListenerHandler.fireEvent(new ItemPickupEvent(object, this));
             handler.removeObject(this);
         }
-        //Collision.applySingleHitboxCollision(this);
+        Collision.applySingleHitboxCollision(this);
     }
 
     public void render(Graphics g) {

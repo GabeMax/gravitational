@@ -39,6 +39,6 @@ public class MouseInput extends MouseAdapter {
     
     public static boolean isMouseButtonDown(int button) {
         Boolean down = mouseButtons.get(button);
-        return down == null ? false : down;
+        return down != null && down;
     }
 }

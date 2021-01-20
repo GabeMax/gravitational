@@ -364,12 +364,10 @@ public class Triangle {
         Line[] lines = new Line[3];
         int i = 0;
         if (isBetweenY(point, (int) slope.triangleBase.getStartY(), (int) slope.triangleBase.getEndY())) {
-            lines[i] = slope.triangleBase;
-            i++;
+            lines[i++] = slope.triangleBase;
         }
         if (isBetweenY(point, (int) slope.triangleOuter1.getStartY(), (int) slope.triangleOuter1.getEndY())) {
-            lines[i] = slope.triangleOuter1;
-            i++;
+            lines[i++] = slope.triangleOuter1;
         }
         if (isBetweenY(point, (int) slope.triangleOuter2.getStartY(), (int) slope.triangleOuter2.getEndY())) {
             lines[i] = slope.triangleOuter2;

@@ -149,24 +149,14 @@ public class Game extends Canvas implements Runnable {
     
     
     public static int clamp(int val, int min, int max) {
-        if(val <= min) {
-            return min;
-        } else if(val >= max) {
-            return max;
-        }
-        return val;
+        return val <= min ? min : Math.min(val, max);
     }
     
     public static double clamp(double val, double min, double max) {
-        if(val <= min) {
-            return min;
-        } else if(val >= max) {
-            return max;
-        }
-        return val;
+        return val <= min ? min : Math.min(val, max);
     }
     
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         new Game();
     }
     

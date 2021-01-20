@@ -48,10 +48,9 @@ public abstract class GameObject {
     public Rectangle getRotatedBoundingBox() {
         BoundingBoxPivot b = getBoundingBoxPivot();
         return switch (getGravityDirection()) {
-            case DOWN -> new Rectangle(x + b.xOffset, y + b.yOffset, b.width, b.height);
+            case DOWN, UP -> new Rectangle(x + b.xOffset, y + b.yOffset, b.width, b.height);
             case RIGHT -> new Rectangle(x + b.xOffset - b.xOffset, y + b.yOffset + b.xOffset, b.height, b.width);
             case LEFT -> new Rectangle(x + b.xOffset - 2 * b.width + 25, y + b.yOffset + b.xOffset, b.height, b.width);
-            case UP -> new Rectangle(x + b.xOffset, y + b.yOffset, b.width, b.height);
         };
     }
     public boolean isTouching(Class c) {
